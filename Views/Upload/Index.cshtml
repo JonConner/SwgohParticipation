@@ -1,0 +1,33 @@
+@using SwgohParticipation.ViewModels
+@model UploadViewModel
+
+<h2>Upload CSV File</h2>
+
+<form asp-action="Index" asp-controller="Upload" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Choose Table:</label><br />
+        <input type="radio" name="TargetTable" value="RoteParticipation" checked /> Territory Battle<br />
+        <input type="radio" name="TargetTable" value="TwParticipation" /> Territory War<br />
+        <input type="radio" name="TargetTable" value="Order66Participation" /> Raid<br />
+        <input type="radio" name="TargetTable" value="TicketParticipation" /> Tickets<br />
+    </div>
+
+    <div>
+        <label>Select Reference Date:</label><br />
+        <input type="date" asp-for="ReferenceDate" />
+    </div>
+
+    <div>
+        <label>Select CSV File:</label><br />
+        <input type="file" asp-for="CsvFile" accept=".csv" />
+    </div>
+
+    <button type="submit">Upload</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div style="margin-top:10px; color: green;">
+        @ViewBag.Message
+    </div>
+}
