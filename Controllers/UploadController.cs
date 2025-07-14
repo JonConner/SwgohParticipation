@@ -63,6 +63,14 @@ namespace SwgohParticipation.Controllers
                         records.ForEach(r => r.WeekEndDate = model.ReferenceDate);
 
                         _context.TicketParticipations.AddRange(records);
+                    } 
+                    else if (model.TargetTable == "PlayerOverview")
+                    {
+                        csv.Context.RegisterClassMap<PlayerOverviewMap>();
+                        var records = csv.GetRecords<PlayerOverview>().ToList();
+                        records.ForEach(r => r.ReportDate = model.ReferenceDate);
+
+                        _context.PlayerOverviews.AddRange(records);
                     }                
 
                     await _context.SaveChangesAsync();
@@ -70,7 +78,14 @@ namespace SwgohParticipation.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.Message = $"Error parsing CSV: {ex.Message}";
+                    if (ex is HeaderValidationException)
+                    {
+                        ViewBag.Message = "Error parsing CSV file. Please ensure the file format is correct.";
+                    }
+                    else
+                    {
+                        ViewBag.Message = $"An error occurred while uploading data: {ex.Message}";
+                    }
                 }
             }
             else
