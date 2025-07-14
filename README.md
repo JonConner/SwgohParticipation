@@ -19,4 +19,4 @@ Track the participation of guild members in Star Wars Galaxy of Heroes by upload
 - [.NET 8](https://dotnet.microsoft.com/)
 - [ASP.NET Core MVC](https://learn.microsoft.com/en-us/aspnet/core/mvc/overview)
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
-- MySQL
+- [MySQL](https://www.mysql.com/)
