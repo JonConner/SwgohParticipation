@@ -1,33 +1,113 @@
 @using SwgohParticipation.ViewModels
 @model UploadViewModel
 
-<h2>Upload CSV File</h2>
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="mb-4">Upload Event Data</h3>
 
-<form asp-action="Index" asp-controller="Upload" method="post" enctype="multipart/form-data">
-    <div>
-        <label>Choose Table:</label><br />
-        <input type="radio" name="TargetTable" value="RoteParticipation" checked /> Territory Battle<br />
-        <input type="radio" name="TargetTable" value="TwParticipation" /> Territory War<br />
-        <input type="radio" name="TargetTable" value="Order66Participation" /> Raid<br />
-        <input type="radio" name="TargetTable" value="TicketParticipation" /> Tickets<br />
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">@ViewBag.Message</div>
+        }
+
+        <form asp-action="Index" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label">Choose Event</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="TargetTable" value="RoteParticipation" checked />
+                    <label class="form-check-label">Territory Battle</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="TargetTable" value="TwParticipation" />
+                    <label class="form-check-label">Territory War</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="TargetTable" value="Order66Participation" />
+                    <label class="form-check-label">Raid</label>
+                </div>
+                <div>
+                    <input class="form-check-input" type="radio" name="TargetTable" value="TicketParticipation" />
+                    <label class="form-check-label">Tickets</label>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ReferenceDate" class="form-label">Select Reference Date</label>
+                <input asp-for="ReferenceDate" class="form-control" type="date" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CsvFile" class="form-label">Select CSV File</label>
+                <input asp-for="CsvFile" id="csvFileInput" class="form-control" type="file" accept=".csv" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+        <hr class="my-4" />
+
+        <div id="csvPreviewContainer" style="display:none;">
+            <h5>Preview</h5>
+            <table class="table table-bordered table-sm" id="csvPreviewTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
+</div>
 
-    <div>
-        <label>Select Reference Date:</label><br />
-        <input type="date" asp-for="ReferenceDate" />
-    </div>
+@* @section Scripts {
+    <script>
+        document.getElementById('csvFileInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            const previewContainer = document.getElementById('csvPreviewContainer');
+            const table = document.getElementById('csvPreviewTable');
+            const thead = table.querySelector('thead');
+            const tbody = table.querySelector('tbody');
 
-    <div>
-        <label>Select CSV File:</label><br />
-        <input type="file" asp-for="CsvFile" accept=".csv" />
-    </div>
+            if (!file || !file.name.endsWith('.csv')) {
+                previewContainer.style.display = 'none';
+                return;
+            }
 
-    <button type="submit">Upload</button>
-</form>
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const lines = event.target.result.split(/\r\n|\n/).filter(line => line.trim() !== '');
+                if (lines.length === 0) {
+                    previewContainer.style.display = 'none';
+                    return;
+                }
 
-@if (ViewBag.Message != null)
-{
-    <div style="margin-top:10px; color: green;">
-        @ViewBag.Message
-    </div>
-}
+                // Clear existing preview
+                thead.innerHTML = '';
+                tbody.innerHTML = '';
+
+                // Create header row
+                const headers = lines[0].split(',');
+                const headerRow = document.createElement('tr');
+                headers.forEach(h => {
+                    const th = document.createElement('th');
+                    th.textContent = h.trim();
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+
+                // Add up to first 5 data rows
+                for (let i = 1; i < Math.min(lines.length, 6); i++) {
+                    const data = lines[i].split(',');
+                    const row = document.createElement('tr');
+                    data.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell.trim();
+                        row.appendChild(td);
+                    });
+                    tbody.appendChild(row);
+                }
+
+                previewContainer.style.display = 'block';
+            };
+
+            reader.readAsText(file);
+        });
+    </script>
+} *@

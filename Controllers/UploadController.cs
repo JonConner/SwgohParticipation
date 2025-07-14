@@ -42,7 +42,7 @@ namespace SwgohParticipation.Controllers
                     }
                     else if (model.TargetTable == "TwParticipation")
                     {
-                        //csv.Context.RegisterClassMap<TwParticipationMap>();
+                        csv.Context.RegisterClassMap<TwParticipationMap>();
                         var records = csv.GetRecords<TwParticipation>().ToList();
                         records.ForEach(r => r.StartDate = model.ReferenceDate);
 
@@ -50,7 +50,7 @@ namespace SwgohParticipation.Controllers
                     }
                     else if (model.TargetTable == "Order66Participation")
                     {
-                        //csv.Context.RegisterClassMap<Order66ParticipationMap>();
+                        csv.Context.RegisterClassMap<Order66ParticipationMap>();
                         var records = csv.GetRecords<Order66Participation>().ToList();
                         records.ForEach(r => r.StartDate = model.ReferenceDate);
 
@@ -58,7 +58,7 @@ namespace SwgohParticipation.Controllers
                     }
                     else if (model.TargetTable == "TicketParticipation")
                     {
-                        //csv.Context.RegisterClassMap<TicketParticipationMap>();
+                        csv.Context.RegisterClassMap<TicketParticipationMap>();
                         var records = csv.GetRecords<TicketParticipation>().ToList();
                         records.ForEach(r => r.WeekEndDate = model.ReferenceDate);
 
