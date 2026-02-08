@@ -49,6 +49,7 @@ namespace SwgohParticipation.Mappings
             Map(m => m.P6CombatAttempts).Name("P6 Combat Attempts");
             Map(m => m.P6SpecialAttempts).Name("P6 Special Attempts");
             Map(m => m.P6Waves).Name("P6 Waves");
+            Map(m => m.IsZeffoMissionCompleted).Name("Zeffo Mission Completed").TypeConverter<CustomBoolConverter>();
         }
     }
 }

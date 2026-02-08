@@ -1,0 +1,7 @@
+Instructions for Common Operations
+
+Update Database After Updating model
+1. Add a migration (dotnet ef migrations add <MigrationName>)
+2. Apply the migration to the database (dotnet ef database update)
+
+

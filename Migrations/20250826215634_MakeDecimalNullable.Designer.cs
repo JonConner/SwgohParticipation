@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwgohParticipation.Data;
 
@@ -11,9 +12,11 @@ using SwgohParticipation.Data;
 namespace SwgohParticipation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250826215634_MakeDecimalNullable")]
+    partial class MakeDecimalNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,21 +33,8 @@ namespace SwgohParticipation.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("AllyCode")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<decimal?>("DiffPercent")
                         .HasColumnType("decimal(65,30)");
-
-                    b.Property<int?>("Difference")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EstimatedScore")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LastActualScore")
-                        .HasColumnType("int");
 
                     b.HasKey("StartDate", "Name");
 
@@ -182,25 +172,22 @@ namespace SwgohParticipation.Migrations
                     b.Property<int>("CombatWaves")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("IsP1Deployed")
+                    b.Property<bool>("IsP1Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsP2Deployed")
+                    b.Property<bool>("IsP2Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsP3Deployed")
+                    b.Property<bool>("IsP3Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsP4Deployed")
+                    b.Property<bool>("IsP4Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsP5Deployed")
+                    b.Property<bool>("IsP5Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsP6Deployed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsZeffoMissionCompleted")
+                    b.Property<bool>("IsP6Deployed")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int>("P1CombatAttempts")
@@ -315,38 +302,7 @@ namespace SwgohParticipation.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("AllyCode")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("AverageTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CurrentTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FridayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LifetimeTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MondayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SaturdayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SundayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ThursdayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TuesdayTickets")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WednesdayTickets")
+                    b.Property<int>("DailyAverage")
                         .HasColumnType("int");
 
                     b.HasKey("WeekEndDate", "Name");
@@ -362,21 +318,9 @@ namespace SwgohParticipation.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("AttackBanners")
-                        .HasColumnType("int");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("DefenseBanners")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MinimumBanners")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalBanners")
-                        .HasColumnType("int");
 
                     b.HasKey("StartDate", "Name");
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwgohParticipation.Data;
 
@@ -11,9 +12,11 @@ using SwgohParticipation.Data;
 namespace SwgohParticipation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251031235033_UpdateLoaSupport")]
+    partial class UpdateLoaSupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,7 +203,7 @@ namespace SwgohParticipation.Migrations
                     b.Property<bool?>("IsP6Deployed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool?>("IsZeffoMissionCompleted")
+                    b.Property<bool>("IsZeffoMissionCompleted")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<int>("P1CombatAttempts")
@@ -319,7 +322,7 @@ namespace SwgohParticipation.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("AverageTickets")
+                    b.Property<int>("AverageTickets")
                         .HasColumnType("int");
 
                     b.Property<int>("CurrentTickets")

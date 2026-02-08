@@ -8,7 +8,7 @@ namespace SwgohParticipation.Converters
     {
         public override object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
-            if (string.IsNullOrWhiteSpace(text)) return false;
+            if (string.IsNullOrWhiteSpace(text)) return null;
 
             return text.Trim().ToLower() switch
             {
