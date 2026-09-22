@@ -8,7 +8,9 @@ namespace SwgohParticipation.Converters
     {
         public override object ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
+#pragma warning disable CS8603 // Possible null reference return.
             if (string.IsNullOrWhiteSpace(text)) return null;
+#pragma warning restore CS8603 // Possible null reference return.
 
             return text.Trim().ToLower() switch
             {
