@@ -316,7 +316,6 @@ namespace SwgohParticipation.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("AllyCode")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int?>("AverageTickets")
@@ -328,7 +327,7 @@ namespace SwgohParticipation.Migrations
                     b.Property<int?>("FridayTickets")
                         .HasColumnType("int");
 
-                    b.Property<int>("LifetimeTickets")
+                    b.Property<int?>("LifetimeTickets")
                         .HasColumnType("int");
 
                     b.Property<int?>("MondayTickets")
