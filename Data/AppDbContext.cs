@@ -7,7 +7,7 @@ namespace SwgohParticipation.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {}
 
-        public DbSet<Order66Participation> Order66Participations { get; set; }
+        public DbSet<RaidParticipation> RaidParticipations { get; set; }
         public DbSet<PlayerOverview> PlayerOverviews { get; set; }
         public DbSet<RoteParticipation> RoteParticipations { get; set; }
         public DbSet<TwParticipation> TwParticipations { get; set; }
@@ -16,8 +16,14 @@ namespace SwgohParticipation.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Order66Participation>()
-                .HasKey(o66p => new { o66p.StartDate, o66p.Name }); // Composite PK
+            modelBuilder.Entity<RaidParticipation>()
+                .HasKey(raid => new { raid.StartDate, raid.Name }); // Composite PK
+
+            modelBuilder.Entity<RaidParticipation>()
+                .Property(raid => raid.Raid)
+                .HasColumnName("raid")
+                .HasMaxLength(32)
+                .HasDefaultValue("order66");
 
             // Keeping composite keys consistent with the rest of the entities
             modelBuilder.Entity<PlayerOverview>()

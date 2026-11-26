@@ -22,7 +22,7 @@ namespace SwgohParticipation.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("SwgohParticipation.Models.Order66Participation", b =>
+            modelBuilder.Entity("SwgohParticipation.Models.RaidParticipation", b =>
                 {
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
@@ -46,9 +46,16 @@ namespace SwgohParticipation.Migrations
                     b.Property<int?>("LastActualScore")
                         .HasColumnType("int");
 
+                    b.Property<string>("Raid")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)")
+                        .HasDefaultValue("order66")
+                        .HasColumnName("raid");
+
                     b.HasKey("StartDate", "Name");
 
-                    b.ToTable("Order66Participations");
+                    b.ToTable("RaidParticipations");
                 });
 
             modelBuilder.Entity("SwgohParticipation.Models.PlayerOverview", b =>

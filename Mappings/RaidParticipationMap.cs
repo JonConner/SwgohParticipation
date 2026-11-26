@@ -4,9 +4,9 @@ using SwgohParticipation.Converters;
 
 namespace SwgohParticipation.Mappings
 {
-    public class Order66ParticipationMap : ClassMap<Order66Participation>
+    public class RaidParticipationMap : ClassMap<RaidParticipation>
     {
-        public Order66ParticipationMap()
+        public RaidParticipationMap()
         {
             Map(m => m.Name).Name("name");
             Map(m => m.AllyCode).Name("allycode");

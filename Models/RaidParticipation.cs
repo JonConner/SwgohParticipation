@@ -1,10 +1,11 @@
 namespace SwgohParticipation.Models
 {
-    public class Order66Participation
+    public class RaidParticipation
     {
         public DateTime StartDate { get; set; }
         public required string Name { get; set; }
         public required string AllyCode { get; set; }
+        public string Raid { get; set; } = "order66";
         public int? EstimatedScore { get; set; }
         public int? LastActualScore { get; set; }
         public int? Difference { get; set; }

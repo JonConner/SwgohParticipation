@@ -48,13 +48,30 @@ namespace SwgohParticipation.Controllers
 
                         _context.TwParticipations.AddRange(records);
                     }
-                    else if (model.TargetTable == "Order66Participation")
+                    else if (model.TargetTable == "RaidParticipation")
                     {
-                        csv.Context.RegisterClassMap<Order66ParticipationMap>();
-                        var records = csv.GetRecords<Order66Participation>().ToList();
-                        records.ForEach(r => r.StartDate = model.ReferenceDate);
+                        var fileName = Path.GetFileName(model.CsvFile.FileName);
+                        var raid = fileName.StartsWith("order66", StringComparison.OrdinalIgnoreCase)
+                            ? "order66"
+                            : fileName.StartsWith("droid", StringComparison.OrdinalIgnoreCase)
+                                ? "droid"
+                                : null;
 
-                        _context.Order66Participations.AddRange(records);
+                        if (raid is null)
+                        {
+                            ViewBag.Message = "Raid CSV filenames must start with 'order66' or 'droid'.";
+                            return View(model);
+                        }
+
+                        csv.Context.RegisterClassMap<RaidParticipationMap>();
+                        var records = csv.GetRecords<RaidParticipation>().ToList();
+                        records.ForEach(r =>
+                        {
+                            r.StartDate = model.ReferenceDate;
+                            r.Raid = raid;
+                        });
+
+                        _context.RaidParticipations.AddRange(records);
                     }
                     else if (model.TargetTable == "TicketParticipation")
                     {
